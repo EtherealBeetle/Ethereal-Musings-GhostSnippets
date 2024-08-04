@@ -1,0 +1,123 @@
+<!-- Umami Analytics Script (UAS) -->
+<!-- This script is used to track website analytics using Umami -->
+<script 
+  defer 
+  src="https://umami.medaint.xyz/script.js" 
+  data-website-id=""
+></script>
+<!-- 
+  Attributes explained:
+  - defer: This attribute tells the browser to defer script execution until the page has finished loading.
+  - src: The source URL of the Umami analytics script.
+  - data-website-id: Your unique website ID for Umami analytics.
+-->
+
+<!-- Discord Feature Update Template (DFUT) Styles -->
+<style id="dfut-styles">
+  /* CSS will be injected here dynamically */
+</style>
+
+<!-- DFUT JavaScript for dynamic CSS injection -->
+<script>
+(function() {
+  var styles = `
+    /* Main container for feature updates */
+    .dfut-feature-update {
+      color: #fff;
+      background-color: #1E2761; /* Corrected background color */
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    /* Inner container for feature update content */
+    .dfut-feature-update > div {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    /* Header section containing feature icon and name */
+    .dfut-feature-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    /* Feature icon styling */
+    .dfut-feature-icon {
+      width: 64px;
+      height: 64px;
+      margin-right: 15px;
+    }
+
+    /* Feature name styling */
+    .dfut-feature-name {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    /* Update type (e.g., Major Update, Minor Change) */
+    .dfut-update-type {
+      margin: 5px 0 0;
+      font-size: 18px;
+      color: #408EC6; /* Corrected accent color */
+    }
+
+    /* Brief summary of the update */
+    .dfut-update-summary {
+      margin: 0 0 15px;
+      font-size: 16px;
+    }
+
+    /* Developer comment block */
+    .dfut-dev-comment {
+      margin: 0 0 20px;
+      padding: 10px;
+      background-color: rgba(64, 142, 198, 0.2); /* Using accent color for consistency */
+      border-left: 5px solid #408EC6; /* Accent color */
+      font-style: italic;
+    }
+
+    /* Container for individual change items */
+    .dfut-change-item {
+      display: flex;
+      margin-bottom: 15px;
+    }
+
+    /* Icon for each change item */
+    .dfut-change-icon {
+      width: 48px;
+      height: 48px;
+      margin-right: 15px;
+    }
+
+    /* Name of the changed item or feature */
+    .dfut-change-name {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #408EC6; /* Accent color */
+    }
+
+    /* List of change details */
+    .dfut-change-details {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    /* Styling for old (removed or changed) values */
+    .dfut-old-value {
+      text-decoration: line-through;
+    }
+
+    /* Styling for new (added or updated) values */
+    .dfut-new-value {
+      font-weight: bold;
+      color: #408EC6; /* Accent color for emphasis */
+    }
+  `;
+  
+  // Inject the styles into the designated style tag
+  document.getElementById('dfut-styles').textContent = styles;
+})();
+</script>
