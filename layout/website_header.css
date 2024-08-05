@@ -24,100 +24,241 @@
     /* Main container for feature updates */
     .dfut-feature-update {
       color: #fff;
-      background-color: #1E2761; /* Corrected background color */
+      background-color: #1E2761;
       padding: 20px;
       border-radius: 5px;
       margin-bottom: 20px;
     }
-
     /* Inner container for feature update content */
     .dfut-feature-update > div {
       background-color: rgba(255, 255, 255, 0.1);
       padding: 20px;
       border-radius: 5px;
     }
-
     /* Header section containing feature icon and name */
     .dfut-feature-header {
       display: flex;
       align-items: center;
       margin-bottom: 15px;
     }
-
     /* Feature icon styling */
     .dfut-feature-icon {
       width: 64px;
       height: 64px;
       margin-right: 15px;
     }
-
     /* Feature name styling */
     .dfut-feature-name {
       margin: 0;
       font-size: 24px;
     }
-
     /* Update type (e.g., Major Update, Minor Change) */
     .dfut-update-type {
       margin: 5px 0 0;
       font-size: 18px;
-      color: #408EC6; /* Corrected accent color */
+      color: #408EC6;
     }
-
     /* Brief summary of the update */
     .dfut-update-summary {
       margin: 0 0 15px;
       font-size: 16px;
     }
-
     /* Developer comment block */
     .dfut-dev-comment {
       margin: 0 0 20px;
       padding: 10px;
-      background-color: rgba(64, 142, 198, 0.2); /* Using accent color for consistency */
-      border-left: 5px solid #408EC6; /* Accent color */
+      background-color: rgba(64, 142, 198, 0.2);
+      border-left: 5px solid #408EC6;
       font-style: italic;
     }
-
+    /* Container for all change items */
+    .dfut-change-items-container {
+      /* No specific styles needed, but useful for targeting */
+    }
     /* Container for individual change items */
     .dfut-change-item {
       display: flex;
       margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(64, 142, 198, 0.3);
     }
-
+    /* Remove border from the last change item */
+    .dfut-change-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
     /* Icon for each change item */
     .dfut-change-icon {
       width: 48px;
       height: 48px;
       margin-right: 15px;
     }
-
     /* Name of the changed item or feature */
     .dfut-change-name {
       margin: 0 0 10px;
       font-size: 18px;
-      color: #408EC6; /* Accent color */
+      color: #408EC6;
     }
-
     /* List of change details */
     .dfut-change-details {
       margin: 0;
       padding-left: 20px;
     }
-
     /* Styling for old (removed or changed) values */
     .dfut-old-value {
       text-decoration: line-through;
     }
-
     /* Styling for new (added or updated) values */
     .dfut-new-value {
       font-weight: bold;
-      color: #408EC6; /* Accent color for emphasis */
+      color: #408EC6;
+    }
+    /* Tabs container */
+    .dfut-instructions-tabs {
+      margin-top: 15px;
+    }
+    /* Tab buttons */
+    .dfut-tab-buttons {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .dfut-tab-button {
+      background-color: #408EC6;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    .dfut-tab-button:hover {
+      opacity: 1;
+    }
+    .dfut-tab-button.active {
+      opacity: 1;
+      font-weight: bold;
+    }
+    /* Tab content */
+    .dfut-tab-content {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 5px;
+    }
+    .dfut-tab-pane {
+      display: none;
+    }
+    .dfut-tab-pane.active {
+      display: block;
+    }
+    /* Instructions styling */
+    .dfut-tab-pane h5 {
+      margin-top: 0;
+      color: #408EC6;
+    }
+    .dfut-tab-pane ol {
+      padding-left: 20px;
+    }
+    .dfut-tab-pane li {
+      margin-bottom: 5px;
+    }
+    /* Video styling */
+    .dfut-demo-video video {
+      width: 100%;
+      max-width: 600px;
+      display: block;
+      margin: 0 auto 15px;
     }
   `;
+   // Inject the styles into the designated style tag
+  if (document.getElementById('dfut-styles')) {
+    document.getElementById('dfut-styles').textContent = styles;
+  } else {
+    var styleTag = document.createElement('style');
+    styleTag.id = 'dfut-styles';
+    styleTag.textContent = styles;
+    document.head.appendChild(styleTag);
+  }
+
+  // Tab functionality
+  function setupTabs() {
+    console.log('Setting up tabs...');
+    const tabContainers = document.querySelectorAll('.dfut-instructions-tabs');
+    console.log('Found', tabContainers.length, 'tab containers');
   
-  // Inject the styles into the designated style tag
-  document.getElementById('dfut-styles').textContent = styles;
+    tabContainers.forEach((container, index) => {
+      console.log('Setting up container', index + 1);
+      const tabs = container.querySelectorAll('.dfut-tab-button');
+      const panes = container.querySelectorAll('.dfut-tab-pane');
+      
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = tab.getAttribute('data-target');
+          console.log('Tab clicked:', target);
+          
+          // Deactivate all tabs and panes within this container
+          tabs.forEach(t => t.classList.remove('active'));
+          panes.forEach(p => p.classList.remove('active'));
+          
+          // Activate the clicked tab and its corresponding pane
+          tab.classList.add('active');
+          const targetPane = container.querySelector(`#${target}`);
+          if (targetPane) {
+            targetPane.classList.add('active');
+            console.log('Activated pane:', target);
+          } else {
+            console.log('Target pane not found:', target);
+          }
+        });
+      });
+    });
+  }
+
+  function checkAndSetupTabs() {
+    const dfutElements = document.querySelectorAll('.dfut-feature-update');
+    if (dfutElements.length > 0) {
+      console.log('DFUT elements found, setting up tabs...');
+      setupTabs();
+      return true;
+    } else {
+      console.log('No DFUT elements found yet');
+      return false;
+    }
+  }
+
+  function initDFUT() {
+    // Set up a MutationObserver to watch for changes in the DOM
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+          if (checkAndSetupTabs()) {
+            observer.disconnect(); // Stop observing once we've set up the tabs
+          }
+        }
+      });
+    });
+
+    // Start observing the document with the configured parameters
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Periodic check for DFUT elements
+    let checkCount = 0;
+    const maxChecks = 20; // Check for 10 seconds (20 * 500ms)
+    const checkInterval = setInterval(() => {
+      if (checkAndSetupTabs() || checkCount >= maxChecks) {
+        clearInterval(checkInterval);
+        observer.disconnect();
+      }
+      checkCount++;
+    }, 500);
+  }
+
+  // Run the initialization when the DOM is fully loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDFUT);
+  } else {
+    initDFUT();
+  }
 })();
 </script>
